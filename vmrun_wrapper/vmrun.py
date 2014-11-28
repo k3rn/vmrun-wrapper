@@ -14,12 +14,12 @@ class vmrun():
         """
         Executes the vmrun utility based on the given arguments.
 
-        :param list arguments: a
-
-        Is a list in which the first element is the \
-        command to be executed. The second element is the path to the virtual
-        machine, it can be the .vmwarevm folder or the .vmx folder.
-        The subsequent elements are aditional parameters.
+        :param list arguments: | The first element is the command to be
+                               | executed. The second is the path to the
+                               | virtual machine and has to be either the
+                               | extension *.vmx* or *.vmwarevm*. The remaining
+                               | elements are aditionals depending of the
+                               | command to be executed.
         """
         if arguments[0] != 'list' and not self.vmx_path_is_valid(arguments[1]):
             raise ValueError
