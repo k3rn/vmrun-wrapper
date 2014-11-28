@@ -118,3 +118,23 @@ class vmrun():
         for n in range(4, len(result)):
             machines.append(result[n])
         return {'count': result[3], 'machines': machines}
+
+    def clone(self, vmx_path_src, vmx_path_dest, full=True, snapshot=None):
+        """
+        Clone the virtual machine
+
+        :param str vmx_path_src: The path to the original virtual machine
+        :param str vmx_path_dest: The path to the clone virtual machine
+        :param bool full: Whether it is a full or linked clone
+        :param str snapshot: The snapshot to clone from
+        """
+        args = ['clone', vmx_path_src, vmx_path_dest]
+        if full:
+            args.append('full')
+        else:
+            args.append('linked')
+        if snapshot:
+            args.append('-snapshot=%s' % snapshot)
+        if name:
+            args.append('-cloneName=%s' % name)
+        self._cli(args)
