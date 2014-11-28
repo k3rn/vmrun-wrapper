@@ -98,15 +98,13 @@ class vmrun():
         Unpause the virtual machine
 
         :param str vmx_path: The path of the virtual machine
-        :param hard: Whether it is to suspend in the hard way
+        :param bool hard: Whether it is to suspend in the hard way
         """
         self._cli(['suspend', vmx_path])
 
     def list(self):
         """
         Lists the running virtual machines.
-
-        Return a
 
         :returns: The number and the list of the machines running
         :rtype: dict
