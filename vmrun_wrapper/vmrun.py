@@ -7,8 +7,8 @@ class vmrun():
         if bundle_path:
             pass
         else:
-            self.cli_path = ['/Applications/VMware Fusion.app/Contents'
-                             '/Library/vmrun', '-T', 'fusion']
+            self._cli_path = ['/Applications/VMware Fusion.app/Contents'
+                              '/Library/vmrun', '-T', 'fusion']
 
     def _cli(self, arguments):
         if arguments[0] != 'list' and not self.check_vmx_path(arguments[1]):
