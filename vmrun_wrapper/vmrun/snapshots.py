@@ -1,7 +1,7 @@
 from vmrun_wrapper.vmrun import cli
 
 
-class snapshot():
+class snapshots():
 
     def __init__(self):
         self.vmrun = cli().cli
@@ -10,6 +10,10 @@ class snapshot():
         """
         List the snapshots of a virtual machine.
 
+        At this point I can't figure out a way to display the connections
+        between snapshots, so if showtree set to true, it doesn't return
+        anything diferent at this point.
+
         :param str vmx_path: The path to the virtual machine.
         :param bool showtree: Whether show the snapshot tree.
         :returns: The number of snapshots and the names
@@ -17,11 +21,12 @@ class snapshot():
         """
         if showtree:
             result = self.vmrun(['listSnapshots', vmx_path,
-                                'showTree']).split()
+                                'showTree'])[0].split()
         else:
             result = self.vmrun(['listSnapshots', vmx_path])[0].split()
         if int(result[2]) == 0:
             return {'count': 0}
+
         snapshots = list()
         for n in range(3, len(result)):
             snapshots.append(result[n])
