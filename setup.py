@@ -6,7 +6,7 @@ except ImportError:
 
 setup(
     name='vmrun_wrapper',
-    version='0.0.1',
+    version='1.0',
     author='Matues Kern',
     author_email='kern@mateuskern.com',
     license='LICENSE.txt',
