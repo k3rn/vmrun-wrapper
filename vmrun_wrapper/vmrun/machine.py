@@ -1,32 +1,10 @@
-import subprocess
+from vmrun_wrapper.vmrun import cli
 
 
-class vmrun():
+class machine():
 
-    def __init__(self, bundle_path=None, binary_path=None):
-        if bundle_path:
-            pass
-        else:
-            self._cli_path = ['/Applications/VMware Fusion.app/Contents'
-                              '/Library/vmrun', '-T', 'fusion']
-
-    def _cli(self, arguments):
-        """
-        Executes the vmrun utility based on the given arguments.
-
-        :param list arguments: | The first element is the command to be
-                               | executed. The second is the path to the
-                               | virtual machine and has to be either the
-                               | extension *.vmx* or *.vmwarevm*. The remaining
-                               | elements are aditionals depending of the
-                               | command to be executed.
-        """
-        if arguments[0] != 'list' and not self.vmx_path_is_valid(arguments[1]):
-            raise ValueError
-
-        command = self.cli_path + arguments
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE)
-        return proc.communicate()
+    def __init__(self):
+        self.vmrun = cli().cli
 
     def vmx_path_is_valid(self, vmx_path):
         """
@@ -60,9 +38,9 @@ class vmrun():
         :param bool gui: Whether it is to start in the gui mode
         """
         if not gui:
-            self._cli(['start', vmx_path, 'nogui'])
+            self.vmrun(['start', vmx_path, 'nogui'])
         else:
-            self._cli(['start', vmx_path, 'gui'])
+            self.vmrun(['start', vmx_path, 'gui'])
 
     def stop(self, vmx_path, hard=True):
         """
@@ -73,9 +51,9 @@ class vmrun():
         """
 
         if hard:
-            self._cli(['stop', vmx_path, 'hard'])
+            self.vmrun(['stop', vmx_path, 'hard'])
         else:
-            self._cli(['stop', vmx_path, 'soft'])
+            self.vmrun(['stop', vmx_path, 'soft'])
 
     def pause(self, vmx_path):
         """
@@ -83,7 +61,7 @@ class vmrun():
 
         :param str vmx_path: The path of the virtual machine
         """
-        self._cli(['pause', vmx_path])
+        self.vmrun(['pause', vmx_path])
 
     def unpause(self, vmx_path):
         """
@@ -91,7 +69,7 @@ class vmrun():
 
         :param str vmx_path: The path of the virtual machine
         """
-        self._cli(['unpause', vmx_path])
+        self.vmrun(['unpause', vmx_path])
 
     def suspend(self, vmx_path, hard=True):
         """
@@ -100,7 +78,7 @@ class vmrun():
         :param str vmx_path: The path of the virtual machine
         :param bool hard: Whether it is to suspend in the hard way
         """
-        self._cli(['suspend', vmx_path])
+        self.vmrun(['suspend', vmx_path])
 
     def list(self):
         """
@@ -109,7 +87,7 @@ class vmrun():
         :returns: The number and the list of the machines running
         :rtype: dict
         """
-        result = self._cli(['list'])[0].split()
+        result = self.vmrun(['list'])[0].split()
         if int(result[3]) == 0:
             return {'count': 0}
         machines = list()
@@ -135,4 +113,4 @@ class vmrun():
             args.append('-snapshot=%s' % snapshot)
         if name:
             args.append('-cloneName=%s' % name)
-        self._cli(args)
+        self.vmrun(args)
