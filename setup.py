@@ -6,10 +6,12 @@ except ImportError:
 
 setup(
     name='vmrun_wrapper',
+    description='a wrapper for the VMWare Fusion\'s vmrun utility.',
     version='1.0',
-    author='Matues Kern',
+    author='Mateus Kern',
     author_email='kern@mateuskern.com',
+    url='https://github.com/k3rn/vmrun-wrapper',
     license='LICENSE.txt',
-    packages=find_packages(),
-    test_suite='vmrun_wrapper.tests'
+    test_suite='vmrun_wrapper.tests',
+    packages=find_packages(exclude='tests'),
 )
