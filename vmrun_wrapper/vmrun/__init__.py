@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 
 class cli():
@@ -44,10 +45,22 @@ class cli():
             vmx_path = vmx_path[:-1]
 
         if vmx_path[-3:] != 'vmx':
-            a = vmx_path[-8:]
-            if a == 'vmwarevm':
-                return True
+            if vmx_path[-8:] == 'vmwarevm':
+                if os.path.isdir(vmx_path):
+                    filelist = os.listdir(vmx_path)
+                    for file in filelist:
+                        if file[-3:] == 'vmx':
+                            path = os.path.join(vmx_path, file)
+                            if os.path.isfile(path):
+                                return True
+                            else:
+                                return False
+                else:
+                    return False
             else:
                 return False
         else:
-            return True
+            if os.path.isfile(vmx_path):
+                return True
+            else:
+                return False

@@ -6,30 +6,6 @@ class machine():
     def __init__(self):
         self.vmrun = cli().cli
 
-    def vmx_path_is_valid(self, vmx_path):
-        """
-        Verify if the given path is valid following these conditions:
-
-        If the extension is *.vmx*, verify it exists and is a file.
-
-        If the extension is *.vmwarevm*, verify if it is a folder and
-        contains a *.vmx* file inside.
-
-        :param str vmx_path: The path to be tested
-        :rtype: bool
-        """
-        if vmx_path[-1:] == '/':
-            vmx_path = vmx_path[:-1]
-
-        if vmx_path[-3:] != 'vmx':
-            a = vmx_path[-8:]
-            if a == 'vmwarevm':
-                return True
-            else:
-                return False
-        else:
-            return True
-
     def start(self, vmx_path, gui=False):
         """
         Start the virtual machine
