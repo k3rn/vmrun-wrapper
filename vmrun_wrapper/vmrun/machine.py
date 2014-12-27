@@ -91,3 +91,16 @@ class machine():
         if name:
             args.append('-cloneName=%s' % name)
         self.vmrun(args)
+
+    def get_ip(self, vmx_path):
+        """
+        Get the IP of the virtual machine. The VMWare Tools need to be
+        installed and running.
+
+        :param str vmx_path: The path to the vritual machine
+        :returns: The IP address
+        :rtype: str:
+        """
+
+        result = self.vmrun(['getGuestIPAddress', vmx_path])[0][:-1]
+        return result
