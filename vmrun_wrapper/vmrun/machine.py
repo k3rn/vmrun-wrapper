@@ -71,7 +71,8 @@ class machine():
             machines.append(result[n])
         return {'count': result[3], 'machines': machines}
 
-    def clone(self, vmx_path_src, vmx_path_dest, full=True, snapshot=None):
+    def clone(self, vmx_path_src, vmx_path_dest, full=True, snapshot=None,
+              name=None):
         """
         Clone the virtual machine
 
