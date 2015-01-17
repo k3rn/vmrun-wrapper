@@ -104,5 +104,5 @@ class machine():
         :rtype: str:
         """
 
-        result = self.vmrun(['getGuestIPAddress', vmx_path])[0][:-1]
-        return result
+        result = self.vmrun(['readVariable', vmx_path, 'guestVar', 'ip'])
+        return result[0]
