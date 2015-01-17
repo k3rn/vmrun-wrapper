@@ -15,9 +15,10 @@ class machine():
         :param bool gui: Whether it is to start in the gui mode
         """
         if not gui:
-            self.vmrun(['start', vmx_path, 'nogui'])
+            result = self.vmrun(['start', vmx_path, 'nogui'])
         else:
-            self.vmrun(['start', vmx_path, 'gui'])
+            result = self.vmrun(['start', vmx_path, 'gui'])
+        return result
 
     def stop(self, vmx_path, hard=True):
         """
