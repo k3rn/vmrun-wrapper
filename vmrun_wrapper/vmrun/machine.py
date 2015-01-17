@@ -5,6 +5,7 @@ class machine():
 
     def __init__(self):
         self.vmrun = cli().cli
+        self.vmx_path_is_valid = cli().vmx_path_is_valid
 
     def start(self, vmx_path, gui=False):
         """
