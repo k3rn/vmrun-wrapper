@@ -3,8 +3,8 @@ from vmrun_wrapper.vmrun import cli
 
 class machine():
 
-    def __init__(self):
-        self.vmrun = cli().cli
+    def __init__(self, vmrun_path=None):
+        self.vmrun = cli(vmrun_path).cli
         self.vmx_path_is_valid = cli().vmx_path_is_valid
 
     def start(self, vmx_path, gui=False):

@@ -4,12 +4,12 @@ import os
 
 class cli():
 
-    def __init__(self, bundle_path=None, binary_path=None):
-        if bundle_path:
-            pass
+    def __init__(self, vmrun_path=None):
+        if vmrun_path:
+            self._cli = [vmrun_path, '-T', 'fusion']
         else:
-            self._cli_path = ['/Applications/VMware Fusion.app/Contents'
-                              '/Library/vmrun', '-T', 'fusion']
+            self._cli = ['/Applications/VMware Fusion.app/Contents'
+                         '/Library/vmrun', '-T', 'fusion']
 
     def cli(self, arguments):
         """
@@ -25,7 +25,7 @@ class cli():
         if arguments[0] != 'list' and not self.vmx_path_is_valid(arguments[1]):
             raise ValueError
 
-        command = self._cli_path + arguments
+        command = self._cli + arguments
         proc = subprocess.Popen(command, stdout=subprocess.PIPE)
         return proc.communicate()
 
