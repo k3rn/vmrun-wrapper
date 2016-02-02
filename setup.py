@@ -11,7 +11,7 @@ setup(
     author='Mateus Kern',
     author_email='kern@mateuskern.com',
     url='https://github.com/k3rn/vmrun-wrapper',
-    license='LICENSE.txt',
+    license='MIT',
     test_suite='vmrun_wrapper.tests',
     packages=find_packages(exclude='tests'),
 )
