@@ -26,7 +26,8 @@ class cli():
             raise ValueError
 
         command = self._cli + arguments
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE)
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         return proc.communicate()
 
     def vmx_path_is_valid(self, vmx_path):
