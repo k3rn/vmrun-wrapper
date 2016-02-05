@@ -65,7 +65,7 @@ class machine():
         :returns: The number and the list of the machines running
         :rtype: dict
         """
-        result = self.vmrun(['list'])[0].split()
+        result = self.vmrun(['list']).split()
         if int(result[3]) == 0:
             return {'count': 0}
         machines = list()
@@ -104,5 +104,4 @@ class machine():
         :rtype: str:
         """
 
-        result = self.vmrun(['readVariable', vmx_path, 'guestVar', 'ip'])
-        return result[0]
+        return self.vmrun(['readVariable', vmx_path, 'guestVar', 'ip'])
